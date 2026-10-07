@@ -1,0 +1,5 @@
+skills/
+*.tgz
+.tmp*/
+node_modules/
+__pycache__/

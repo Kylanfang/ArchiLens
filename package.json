@@ -1,0 +1,57 @@
+{
+  "name": "hw-topo-dsh",
+  "version": "0.3.0",
+  "description": "DeepSeek Harness 插件:可溯源的硬件拓扑关系 SVG 示意(模块例化层级/原语/外部依赖),逐元素 file:line 证据 + verify 幻觉率门禁 + wiki 代码库索引(改造自 tt-a1i/archify-dsh);默认消费 RTLens 的 rtlens.evidence/1 证据后端,缺失时回落内置扫描器并显式标注降级",
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "hw-topo",
+    "skills",
+    "docs",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "!hw-topo/test"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "agent-skill",
+    "rtl",
+    "verilog",
+    "fpga",
+    "topology",
+    "code-index",
+    "anti-hallucination",
+    "rtlens-evidence"
+  ],
+  "peerDependencies": {
+    "rtlens-dsh": ">=6.2.0"
+  },
+  "peerDependenciesMeta": {
+    "rtlens-dsh": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prepare": "node scripts/stage-skill.mjs",
+    "test": "node --test hw-topo/test/*.test.mjs && node --test test/*.test.mjs",
+    "smoke": "node hw-topo/bin/hw-topo.mjs doctor --json && node hw-topo/bin/hw-topo.mjs demo ./.tmp-demo"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

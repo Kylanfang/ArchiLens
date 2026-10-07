@@ -1,0 +1,1 @@
+"""TEST FIXTURE ONLY - see __main__.py. Not a real rtlens install."""

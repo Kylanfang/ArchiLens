@@ -1,0 +1,8 @@
+{
+  "name": "rtlens-dsh",
+  "version": "6.2.0",
+  "private": true,
+  "description": "TEST FIXTURE ONLY: stand-in for the rtlens-dsh npm package so hw-topo's --backend rtlens path can be exercised end-to-end before upstream ships `rtlens evidence`.",
+  "type": "module",
+  "engines": { "node": ">=18" }
+}

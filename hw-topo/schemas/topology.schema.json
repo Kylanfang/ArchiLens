@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/tt-a1i/archify-dsh/hw-topo/schemas/topology.schema.json",
+  "title": "hw-topo topology spec",
+  "description": "Evidence-first hardware topology specification. Every node, instance edge, and connection must carry file:line evidence that verify.mjs re-checks against the real RTL tree. Structural checks run in spec.mjs; this schema documents the contract for humans and tooling.",
+  "type": "object",
+  "required": ["meta", "nodes"],
+  "additionalProperties": true,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["title", "project"],
+      "properties": {
+        "title": { "type": "string", "description": "短图题" },
+        "project": {
+          "type": "object",
+          "required": ["root"],
+          "properties": {
+            "name": { "type": ["string", "null"] },
+            "root": { "type": "string", "description": "扫描使用的 RTL 根目录(绝对路径)" }
+          }
+        },
+        "language": { "type": "string", "default": "zh-CN" },
+        "derivedFrom": { "type": "object" },
+        "disclosed_unverified": {
+          "type": "array",
+          "description": "显式披露的未验证元素:保留在图中但以 ⚠ 虚线渲染,不计入幻觉风险分子",
+          "items": {
+            "type": "object",
+            "required": ["id", "reason"],
+            "properties": {
+              "id": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "kind", "file", "line"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^n-[0-9a-f]{10}$" },
+          "label": { "type": "string", "description": "模块名(必须与源码一致,verify 按此比对)" },
+          "kind": { "enum": ["module", "interface", "primitive", "top", "unknown"] },
+          "file": { "type": "string", "description": "root 相对 POSIX 路径" },
+          "line": { "type": "integer", "minimum": 1 },
+          "endLine": { "type": "integer" },
+          "portCount": { "type": "integer" },
+          "params": { "type": "array", "items": { "type": "string" } },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["file", "line"],
+              "properties": {
+                "file": { "type": "string" },
+                "line": { "type": "integer", "minimum": 1 },
+                "role": { "enum": ["declaration", "instantiation", "instantiation-site", "reference", "signal"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "parent", "child", "file", "line"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^i-[0-9a-f]{10}$" },
+          "parent": { "type": "string", "description": "nodes[].id" },
+          "child": { "type": "string", "description": "nodes[].id" },
+          "label": { "type": "string", "description": "实例名,多个实例显示 u_x ×N" },
+          "count": { "type": "integer", "minimum": 1 },
+          "file": { "type": "string" },
+          "line": { "type": "integer", "minimum": 1 },
+          "evidence": { "type": "array" }
+        }
+      }
+    },
+    "connections": {
+      "type": "array",
+      "description": "信号级连接(可选层,由 agent 策展;每条必须给出 signal 出现的 file:line)",
+      "items": {
+        "type": "object",
+        "required": ["id", "from", "to", "signal", "kind", "file", "line"],
+        "properties": {
+          "id": { "type": "string" },
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "signal": { "type": "string" },
+          "kind": { "enum": ["data", "clock", "reset", "handshake", "other"] },
+          "file": { "type": "string" },
+          "line": { "type": "integer", "minimum": 1 },
+          "evidence": { "type": "array" }
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "members"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^g-[0-9a-f]{10}$" },
+          "label": { "type": "string" },
+          "members": { "type": "array", "items": { "type": "string" } },
+          "evidence": { "type": "array" }
+        }
+      }
+    }
+  }
+}

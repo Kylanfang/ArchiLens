@@ -1,0 +1,14 @@
+{
+  "name": "hw-topo",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-traceable RTL hardware topology SVG diagrams (scan -> derive -> verify -> deliver), with the RTLens rtlens.evidence/1 backend as the default evidence source.",
+  "license": "MIT",
+  "bin": {
+    "hw-topo": "./bin/hw-topo.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

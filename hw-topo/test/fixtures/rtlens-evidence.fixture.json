@@ -1,0 +1,290 @@
+{
+  "schema": "rtlens.evidence/1",
+  "tool": { "name": "rtlens", "version": "6.2.0" },
+  "root": { "abs": "<machine>:\\hw-topo\\examples\\fixture\\rtl", "separator": "\\" },
+  "generatedAt": "2026-10-06T03:36:04.483Z",
+  "defines": {},
+  "stats": {
+    "files": 3,
+    "modules": 6,
+    "ports": 29,
+    "signals": 11,
+    "params": 4,
+    "instances": 7,
+    "interfaces": 0,
+    "packages": 0,
+    "topModules": ["tb_hsb_top"]
+  },
+  "files": [
+    {
+      "path": "dma_engine.v",
+      "absPath": "<machine>:\\hw-topo\\examples\\fixture\\rtl\\dma_engine.v",
+      "bytes": 1431,
+      "lines": 62,
+      "sha256": "0b12773596123e02d286b4af032d97ae0a680796193261b790c19bf440861ead"
+    },
+    {
+      "path": "hsb_top.v",
+      "absPath": "<machine>:\\hw-topo\\examples\\fixture\\rtl\\hsb_top.v",
+      "bytes": 2127,
+      "lines": 81,
+      "sha256": "5794428a2518d45bc96e7b9dcaf8b05013319c2a028a1cb829884db923048ac7"
+    },
+    {
+      "path": "port_bench.v",
+      "absPath": "<machine>:\\hw-topo\\examples\\fixture\\rtl\\port_bench.v",
+      "bytes": 1155,
+      "lines": 51,
+      "sha256": "15fc61029b5feb2df80ae56e424e385f4643909e663a9b7292667f69610cf133"
+    }
+  ],
+  "modules": [
+    {
+      "name": "dma_engine",
+      "kind": "module",
+      "role": "leaf-or-mid",
+      "file": "dma_engine.v",
+      "line0": 3,
+      "line1": 4,
+      "endLine0": 40,
+      "endLine1": 41,
+      "portCount": 7,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk_i", "direction": "input", "width": "", "dataType": "wire", "line0": 4, "line1": 5 },
+        { "name": "rst_ni", "direction": "input", "width": "", "dataType": "wire", "line0": 5, "line1": 6 },
+        { "name": "wdata_o", "direction": "output", "width": "[63:0]", "dataType": "reg", "line0": 6, "line1": 7 },
+        { "name": "addr_o", "direction": "output", "width": "[31:0]", "dataType": "reg", "line0": 7, "line1": 8 },
+        { "name": "valid_o", "direction": "output", "width": "", "dataType": "reg", "line0": 8, "line1": 9 },
+        { "name": "ready_i", "direction": "input", "width": "", "dataType": "wire", "line0": 9, "line1": 10 },
+        { "name": "error_o", "direction": "output", "width": "", "dataType": "wire", "line0": 10, "line1": 11 }
+      ],
+      "params": [],
+      "signals": [
+        { "name": "MAX_BURST", "line0": 13, "line1": 14 },
+        { "name": "burst_cnt", "line0": 15, "line1": 16 },
+        { "name": "busy", "line0": 16, "line1": 17 }
+      ],
+      "instantiatedBy": ["hsb_top"],
+      "instances": []
+    },
+    {
+      "name": "tb_hsb_top",
+      "kind": "module",
+      "role": "top",
+      "file": "dma_engine.v",
+      "line0": 43,
+      "line1": 44,
+      "endLine0": 60,
+      "endLine1": 61,
+      "portCount": 3,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk", "direction": "input", "width": "", "dataType": "wire", "line0": 45, "line1": 46 },
+        { "name": "rst_n", "direction": "input", "width": "", "dataType": "wire", "line0": 46, "line1": 47 },
+        { "name": "done", "direction": "output", "width": "", "dataType": "wire", "line0": 47, "line1": 48 }
+      ],
+      "params": [],
+      "signals": [],
+      "instantiatedBy": [],
+      "instances": [
+        {
+          "name": "dut",
+          "type": "hsb_top",
+          "file": "dma_engine.v",
+          "line0": 49,
+          "line1": 50,
+          "connectionCount": 6,
+          "connections": [
+            { "port": "clk_i", "signal": "clk", "line0": 49, "line1": 50 },
+            { "port": "rst_ni", "signal": "rst_n", "line0": 49, "line1": 50 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hsb_top",
+      "kind": "module",
+      "role": "leaf-or-mid",
+      "file": "hsb_top.v",
+      "line0": 5,
+      "line1": 6,
+      "endLine0": 66,
+      "endLine1": 67,
+      "portCount": 6,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk_i", "direction": "input", "width": "", "dataType": "wire", "line0": 9, "line1": 10 },
+        { "name": "rst_ni", "direction": "input", "width": "", "dataType": "wire", "line0": 10, "line1": 11 },
+        { "name": "hsb_req_i", "direction": "input", "width": "", "dataType": "wire", "line0": 12, "line1": 13 },
+        { "name": "hsb_gnt_o", "direction": "output", "width": "", "dataType": "wire", "line0": 13, "line1": 14 },
+        { "name": "bench_stat_o", "direction": "output", "width": "[3:0]", "dataType": "wire", "line0": 15, "line1": 16 },
+        { "name": "error_o", "direction": "output", "width": "", "dataType": "wire", "line0": 16, "line1": 17 }
+      ],
+      "params": [
+        { "name": "ADDR_W", "line0": 6, "line1": 7 },
+        { "name": "DATA_W", "line0": 7, "line1": 8 }
+      ],
+      "signals": [
+        { "name": "clk_div", "line0": 19, "line1": 20 },
+        { "name": "dma_wdata", "line0": 20, "line1": 21 },
+        { "name": "dma_addr", "line0": 21, "line1": 22 },
+        { "name": "dma_valid", "line0": 22, "line1": 23 },
+        { "name": "dma_ready", "line0": 23, "line1": 24 }
+      ],
+      "instantiatedBy": ["tb_hsb_top"],
+      "instances": [
+        {
+          "name": "u_clk_div",
+          "type": "clk_div",
+          "file": "hsb_top.v",
+          "line0": 26,
+          "line1": 27,
+          "connectionCount": 3,
+          "connections": [
+            { "port": "clk_i", "signal": "clk_i", "line0": 26, "line1": 27 }
+          ]
+        },
+        {
+          "name": "u_bench_ch0",
+          "type": "port_bench",
+          "file": "hsb_top.v",
+          "line0": 33,
+          "line1": 34,
+          "connectionCount": 5,
+          "connections": [
+            { "port": "clk_i", "signal": "clk_div", "line0": 33, "line1": 34 }
+          ]
+        },
+        {
+          "name": "u_bench_ch1",
+          "type": "port_bench",
+          "file": "hsb_top.v",
+          "line0": 41,
+          "line1": 42,
+          "connectionCount": 5,
+          "connections": [
+            { "port": "clk_i", "signal": "clk_div", "line0": 41, "line1": 42 }
+          ]
+        },
+        {
+          "name": "u_dma",
+          "type": "dma_engine",
+          "file": "hsb_top.v",
+          "line0": 50,
+          "line1": 51,
+          "connectionCount": 7,
+          "connections": [
+            { "port": "clk_i", "signal": "clk_i", "line0": 50, "line1": 51 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "clk_div",
+      "kind": "module",
+      "role": "leaf-or-mid",
+      "file": "hsb_top.v",
+      "line0": 68,
+      "line1": 69,
+      "endLine0": 79,
+      "endLine1": 80,
+      "portCount": 3,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk_i", "direction": "input", "width": "", "dataType": "wire", "line0": 69, "line1": 70 },
+        { "name": "rst_ni", "direction": "input", "width": "", "dataType": "wire", "line0": 70, "line1": 71 },
+        { "name": "clk_div_o", "direction": "output", "width": "", "dataType": "wire", "line0": 71, "line1": 72 }
+      ],
+      "params": [],
+      "signals": [{ "name": "div_cnt", "line0": 73, "line1": 74 }],
+      "instantiatedBy": ["hsb_top"],
+      "instances": []
+    },
+    {
+      "name": "port_bench",
+      "kind": "module",
+      "role": "leaf-or-mid",
+      "file": "port_bench.v",
+      "line0": 3,
+      "line1": 4,
+      "endLine0": 33,
+      "endLine1": 34,
+      "portCount": 5,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk_i", "direction": "input", "width": "", "dataType": "wire", "line0": 6, "line1": 7 },
+        { "name": "rst_ni", "direction": "input", "width": "", "dataType": "wire", "line0": 7, "line1": 8 },
+        { "name": "req_i", "direction": "input", "width": "", "dataType": "wire", "line0": 8, "line1": 9 },
+        { "name": "gnt_o", "direction": "output", "width": "", "dataType": "wire", "line0": 9, "line1": 10 },
+        { "name": "stat_o", "direction": "output", "width": "[1:0]", "dataType": "wire", "line0": 10, "line1": 11 }
+      ],
+      "params": [{ "name": "CHANNELS", "line0": 4, "line1": 5 }],
+      "signals": [
+        { "name": "lane_done", "line0": 13, "line1": 14 },
+        { "name": "lane_run", "line0": 14, "line1": 15 }
+      ],
+      "instantiatedBy": ["hsb_top"],
+      "instances": [
+        {
+          "name": "u_lane",
+          "type": "bench_lane",
+          "file": "port_bench.v",
+          "line0": 16,
+          "line1": 17,
+          "connectionCount": 5,
+          "connections": [
+            { "port": "clk_i", "signal": "clk_i", "line0": 16, "line1": 17 }
+          ]
+        },
+        {
+          "name": "u_io",
+          "type": "SB_IO",
+          "file": "port_bench.v",
+          "line0": 25,
+          "line1": 26,
+          "connectionCount": 3,
+          "connections": [
+            { "port": "PACKAGE_PIN", "signal": "req_i", "line0": 25, "line1": 26 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bench_lane",
+      "kind": "module",
+      "role": "leaf-or-mid",
+      "file": "port_bench.v",
+      "line0": 35,
+      "line1": 36,
+      "endLine0": 49,
+      "endLine1": 50,
+      "portCount": 5,
+      "definitions": 1,
+      "ports": [
+        { "name": "clk_i", "direction": "input", "width": "", "dataType": "wire", "line0": 36, "line1": 37 },
+        { "name": "rst_ni", "direction": "input", "width": "", "dataType": "wire", "line0": 37, "line1": 38 },
+        { "name": "run_i", "direction": "input", "width": "", "dataType": "wire", "line0": 38, "line1": 39 },
+        { "name": "done_o", "direction": "output", "width": "", "dataType": "wire", "line0": 39, "line1": 40 },
+        { "name": "stat_o", "direction": "output", "width": "[1:0]", "dataType": "wire", "line0": 40, "line1": 41 }
+      ],
+      "params": [],
+      "signals": [{ "name": "cnt", "line0": 42, "line1": 43 }],
+      "instantiatedBy": ["port_bench"],
+      "instances": []
+    }
+  ],
+  "instances": [
+    { "parent": "tb_hsb_top", "type": "hsb_top", "instance": "dut", "file": "dma_engine.v", "line0": 49, "line1": 50, "resolution": "declared", "connections": [] },
+    { "parent": "hsb_top", "type": "clk_div", "instance": "u_clk_div", "file": "hsb_top.v", "line0": 26, "line1": 27, "resolution": "declared", "connections": [] },
+    { "parent": "hsb_top", "type": "port_bench", "instance": "u_bench_ch0", "file": "hsb_top.v", "line0": 33, "line1": 34, "resolution": "declared", "connections": [] },
+    { "parent": "hsb_top", "type": "port_bench", "instance": "u_bench_ch1", "file": "hsb_top.v", "line0": 41, "line1": 42, "resolution": "declared", "connections": [] },
+    { "parent": "hsb_top", "type": "dma_engine", "instance": "u_dma", "file": "hsb_top.v", "line0": 50, "line1": 51, "resolution": "declared", "connections": [] },
+    { "parent": "port_bench", "type": "bench_lane", "instance": "u_lane", "file": "port_bench.v", "line0": 16, "line1": 17, "resolution": "declared", "connections": [] },
+    { "parent": "port_bench", "type": "SB_IO", "instance": "u_io", "file": "port_bench.v", "line0": 25, "line1": 26, "resolution": "vendor-primitive", "connections": [] }
+  ],
+  "unresolved": [
+    { "type": "SB_IO", "classification": "vendor-primitive", "file": "port_bench.v", "line0": 25, "line1": 26, "count": 1, "parents": ["port_bench"] }
+  ],
+  "diagnostics": { "parseErrors": 0, "elaborated": false }
+}
